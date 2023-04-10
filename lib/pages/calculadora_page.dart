@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:imc_calculator/components/card_button.dart';
 import 'package:imc_calculator/components/custom_card.dart';
 import 'package:imc_calculator/components/icon_content.dart';
+import 'package:imc_calculator/components/slider_content.dart';
 import 'package:imc_calculator/constraints.dart';
 
 class CalculadoraPage extends StatelessWidget {
@@ -37,12 +39,25 @@ class CalculadoraPage extends StatelessWidget {
           ),
           Expanded(
             child: CustomCard(
-              child: Placeholder(),
+              child: SliderContent(),
             ),
           ),
           Expanded(
-            child: CustomCard(
-              child: Placeholder(),
+            child: Row(
+              children: [
+                Expanded(
+                  child: CustomCard(
+                    child: CardButton(
+                      labelText: 'Peso',
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: CustomCard(
+                    child: CardButton(labelText: 'Idade'),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
