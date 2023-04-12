@@ -1,60 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:imc_calculator/constraints.dart';
 
-class SliderContent extends StatefulWidget {
-  const SliderContent({super.key});
+class SliderContent extends StatelessWidget {
+  final int altura;
+  final void Function(double) onChanged;
 
-  @override
-  State<SliderContent> createState() => _SliderContentState();
-}
-
-class _SliderContentState extends State<SliderContent> {
-  double _currentValue = 0;
-  double tamanho = 0;
+  const SliderContent(
+      {super.key, required this.altura, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Text(
-              'Altura'.toUpperCase(),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Altura',
+          style: kLabelTextStyle,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
+          children: <Widget>[
+            Text(
+              altura.toString(),
+              style: kNumberTextStyle,
+            ),
+            Text(
+              'cm',
               style: kLabelTextStyle,
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                _currentValue.toStringAsFixed(0),
-                style: kNumberTextStyle,
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(
-                ' cm',
-                style: TextStyle(fontSize: 20),
-              ),
-            ],
-          ),
-          Slider(
-            divisions: 255,
-            min: 0,
-            max: 255,
-            value: _currentValue,
-            onChanged: (value) {
-              setState(
-                () {
-                  _currentValue = value;
-                },
-              );
-            },
-          ),
-        ],
-      ),
+          ],
+        ),
+        Slider(
+          value: altura.toDouble(),
+          min: 120,
+          max: 220,
+          onChanged: onChanged,
+        )
+      ],
     );
   }
 }
